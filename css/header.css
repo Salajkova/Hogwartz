@@ -1,0 +1,41 @@
+/***********
+Header
+************/
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.858);
+    height: 70px;
+}
+
+.logo {
+    flex-grow: 1;
+}
+
+.logo img {
+    width: 50px;
+    margin-left: 20px;
+}
+
+/* navigace */
+nav {
+    margin-right: 30px;
+}
+
+nav li {
+    display: inline-block;
+    /*Budou v řádku */
+    list-style-type: none;
+    margin-right: 20px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu-icon {
+    display: none;
+}
