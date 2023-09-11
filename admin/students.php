@@ -2,10 +2,17 @@
 
 require_once(__DIR__."/../assets/db.php"); // proč nám to ase nefunguje? require "../ sfgfgsfgsf.php" by mělo fungovat
 require_once(__DIR__."/../assets/student.php");
+require_once(__DIR__."/../assets/auth.php");
+
+session_start();
+
+if(!isLoggedIn() ){
+    die("nepovolený přístup!!!"); //video 178 PHP 2023
+}
 
 $connection = connectionDB();
-
 $students = getAllStudents($connection, "id, first_name, second_name");//kvůli columns -> zrychlení
+
 ?>
 
 <!DOCTYPE html>

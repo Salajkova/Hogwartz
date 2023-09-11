@@ -2,6 +2,13 @@
 
 require_once(__DIR__."/../assets/db.php");
 require_once(__DIR__."/../assets/student.php");
+require_once(__DIR__."/../assets/auth.php");
+
+session_start();
+
+if(!isLoggedIn() ){
+    die("nepovolený přístup!!!"); //video 178 PHP 2023
+}
 
 $connection = connectionDB();
 

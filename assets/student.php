@@ -69,7 +69,7 @@ $first_name, $second_name, $age, $life, $college, $id) {
         if(mysqli_stmt_execute($stmt)) {
 
             // redirectUrl("/HPHP/ww2dat/onestudent.php?id=$id"); nevím, proč mi to nemůže najít tu stránku s url.php 125...
-            redirectUrl("/WEB/HPHP/ww2dat/admin/onestudent.php?id=$id");
+            redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
          }
     }
 }
@@ -94,7 +94,7 @@ function delete_student($connection, $id) {
         mysqli_stmt_bind_param($stmt, "i", $id);
 
         if (mysqli_stmt_execute($stmt)) {
-            redirectUrl("/WEB/HPHP/ww2dat/admin/students.php");//bude tohle fungovat? Fungoje to!!!!
+            redirectUrl("/web/Hogwartz/admin/students.php");//bude tohle fungovat? Fungoje to!!!!
         }
     }
 }
@@ -145,7 +145,7 @@ function createStudent($connection, $first_name, $second_name, $age, $life, $col
 
         if(mysqli_stmt_execute($statement)) {
             $id = mysqli_insert_id($connection);
-            redirectUrl("/WEB/HPHP/ww2dat/admin/onestudent.php?id=$id");
+            redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
            // echo "Úspěšně vložen žák s id: $id";
 
         } else {
