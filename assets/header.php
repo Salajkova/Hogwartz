@@ -7,6 +7,7 @@
         <ul> 
             <li><a href="index.php">Úvodní strana</a></li>
             <li><a href="registr.php">Registrace</a></li>
+            <li><a href="signin.php">Přihlášení</a></li>
 
             <!-- li*4>a -->
         </ul>

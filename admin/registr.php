@@ -20,12 +20,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     if(!empty($id)) {
         session_regenerate_id(true); //zabraňuje fixation attack
         
-       //Nastavení, ýže je uživatel přihlášený
+       //Nastavení, že je uživatel přihlášený
         $_SESSION["is_logged_in"] = true;
         //Nastavení ID uživatele
         $_SESSION["logged_in_user_id"] = $id;
 
-        redirectUrl("/web/Hogwartz/admin/students.php"); //nefunguje, jak to má vypadat?
+        redirectUrl("/web/Hogwartz/admin/students.php"); //funguje to?
     } else {
         echo "Uživatele se nepodařilo přidat";
     }

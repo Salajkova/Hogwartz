@@ -8,6 +8,7 @@
             
             <li><a href="students.php">Seznam žáků</a></li>
             <li><a href="addstudent.php">Přidat žáka</a></li>
+            <li><a href="logout.php">Odhlásit</a></li>
             <!-- li*4>a -->
         </ul>
     </nav>
