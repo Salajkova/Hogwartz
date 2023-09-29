@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./query/header-query.css">
     <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/signin.css">
+
     <script src="https://kit.fontawesome.com/f3c1d6cf9d.js" crossorigin="anonymous"></script>
     
-    <title>Document</title>
+    <title>Přihlášení</title>
+    
 </head>
 <body>
 <?php require "assets/header.php"; ?>
@@ -18,9 +21,9 @@
     <section class="form">
         <h1>Přihlášení</h1>
         <form action="admin/login.php" method="POST">
-        <input type="email" name="email"> <br>
-        <input type="password" name="password"> <br>
-        <input type="submit" value="Přihlásit se">
+        <input class="email" type="email" name="email" placeholder="Email"> <br>
+        <input class="password" type="password" name="password" placeholder="Heslo"> <br>
+        <input class="button" type="submit" value="Přihlásit se">
         </form> 
     </section>
 
