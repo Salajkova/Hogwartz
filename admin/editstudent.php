@@ -3,6 +3,7 @@
 require_once(__DIR__."/../assets/db.php");
 require_once(__DIR__."/../assets/student.php");
 require_once(__DIR__."/../assets/auth.php");
+require_once(__DIR__."/../assets/url.php");
 
 session_start();
 
@@ -41,8 +42,10 @@ if(isset($_GET["id"]) ) {
         $life = $_POST["life"];
         $college = $_POST["college"];
 
-    update_student($connection, $first_name, $second_name,
-                    $age, $life, $college, $id);
+    if(update_student($connection, $first_name, $second_name,
+                    $age, $life, $college, $id)) {
+                        redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
+                    };
     
     }
 ?>

@@ -5,6 +5,7 @@
 require_once(__DIR__."/../assets/db.php");
 require_once(__DIR__."/../assets/student.php");
 require_once(__DIR__."/../assets/auth.php");
+require_once(__DIR__."/../assets/url.php");
 
 session_start();
 
@@ -32,7 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $life = $_POST["life"];
     $college = $_POST["college"];
 
-    createStudent($connection, $first_name, $second_name, $age, $life, $college);
+    $id = createStudent($connection, $first_name, $second_name, $age, $life, $college);
+
+    if($id){
+        redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
+    } else {
+        echo "žák nebyl vytvořen";
+    }
 }
 
 ?>

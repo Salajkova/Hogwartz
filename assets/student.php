@@ -1,6 +1,5 @@
 <?php
 
-require "url.php";
 
 // C - create - vytvořit záznam
 // R - read - přečíst záznam
@@ -45,7 +44,7 @@ function get_student($connection, $id, $columns = "*")  {
  * @param string $college
  * @param integer $id
  * 
- * @return void 
+ * @return boolean true - pokud je updatování žáka úspěšné
  */
 function update_student($connection, 
 $first_name, $second_name, $age, $life, $college, $id) {
@@ -67,9 +66,8 @@ $first_name, $second_name, $age, $life, $college, $id) {
         $first_name, $second_name, $age, $life, $college, $id);
 
         if(mysqli_stmt_execute($stmt)) {
-
-            // redirectUrl("/HPHP/ww2dat/onestudent.php?id=$id"); nevím, proč mi to nemůže najít tu stránku s url.php 125...
-            redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
+            return true;
+            
          }
     }
 }
@@ -80,10 +78,10 @@ $first_name, $second_name, $age, $life, $college, $id) {
  * @param object $connection - propojení s databází
  * @param integer id -> id daného žáka. 
  * 
- * @return void
+ * @return bolean true - pokud dojhde k úspěšnému smazání žáka. 
  */
 function delete_student($connection, $id) {
-    $sql = "DELETE from student
+    $sql = "DELETE FROM student
         WHERE id = ?";
 
     $stmt = mysqli_prepare($connection, $sql);
@@ -94,7 +92,7 @@ function delete_student($connection, $id) {
         mysqli_stmt_bind_param($stmt, "i", $id);
 
         if (mysqli_stmt_execute($stmt)) {
-            redirectUrl("/web/Hogwartz/admin/students.php");//bude tohle fungovat? Fungoje to!!!!
+           return true;// redirectUrl("/web/Hogwartz/admin/students.php");//bude tohle fungovat? 
         }
     }
 }
@@ -126,7 +124,7 @@ return $students;
  * @param string $life - podrobnosti o životě
  * @param string $college - kolej žáka
  * 
- * @return 
+ * @return int $id - id přidaného žáka
  */
 function createStudent($connection, $first_name, $second_name, $age, $life, $college) {
     $sql = "INSERT INTO student (first_name, second_name, age, life, college)
@@ -145,8 +143,7 @@ function createStudent($connection, $first_name, $second_name, $age, $life, $col
 
         if(mysqli_stmt_execute($statement)) {
             $id = mysqli_insert_id($connection);
-            redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
-           // echo "Úspěšně vložen žák s id: $id";
+           return $id;
 
         } else {
                 echo mysqli_stmt_error($statement);

@@ -4,6 +4,7 @@
 require_once(__DIR__."/../assets/db.php");
 require_once(__DIR__."/../assets/student.php");
 require_once(__DIR__."/../assets/auth.php");
+require_once(__DIR__."/../assets/url.php");
 
 session_start();
 
@@ -14,7 +15,9 @@ if(!isLoggedIn() ){
 $connection = connectionDB();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
-delete_student($connection, $_GET["id"]);
+if (delete_student($connection, $_GET["id"])){
+    redirectUrl("/web/Hogwartz/admin/students.php");
+}
 }
 
 ?>
