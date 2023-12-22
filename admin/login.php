@@ -1,20 +1,24 @@
 <?php
 
-require_once(__DIR__."/../assets/db.php");
-require_once(__DIR__."/../assets/url.php");
-require_once(__DIR__."/../assets/user.php");
+require_once(__DIR__."/../classes/Db.php");
+require_once(__DIR__."/../classes/Url.php");
+require_once(__DIR__."/../classes/User.php");
 
 session_start();
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $connection = connectionDB();
+    //$connection = connectionDB();
+    $database = new Database(); 
+    $connection = $database->connectionDB();
+
+
     $log_email = $_POST["email"];
     $log_password = $_POST["password"];
     
- if(authentication($connection, $log_email, $log_password)) {
+ if(User::authentication($connection, $log_email, $log_password)) {
     //získání ID uživatele
-    $id = getUserId($connection, $log_email);
+    $id = User::getUserId($connection, $log_email);
 
     session_regenerate_id(true); //zabraňuje fixation attack
     //echo $id; mělo by fungovat, ale  nejde, nejspíš kvůli autentifikaci, video 185
@@ -24,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
        //Nastavení ID uživatele
        $_SESSION["logged_in_user_id"] = $id;
 
-       redirectUrl("/web/Hogwartz/admin/students.php");
+       Url::redirectUrl("/web/Hogwartz/admin/students.php");
 
  } else {
 //Neúspěšné přihlášení

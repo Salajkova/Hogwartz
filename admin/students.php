@@ -1,17 +1,20 @@
 <?php
 
-require_once(__DIR__."/../assets/db.php"); // proč nám to ase nefunguje? require "../ sfgfgsfgsf.php" by mělo fungovat
-require_once(__DIR__."/../assets/student.php");
-require_once(__DIR__."/../assets/auth.php");
+require_once(__DIR__."/../classes/Db.php"); 
+require_once(__DIR__."/../classes/Student.php");
+require_once(__DIR__."/../classes/Auth.php");
 
 session_start();
 
-if(!isLoggedIn() ){
+if(!Auth::isLoggedIn() ){
     die("nepovolený přístup!!!"); //video 178 PHP 2023
 }
 
-$connection = connectionDB();
-$students = getAllStudents($connection, "id, first_name, second_name");//kvůli columns -> zrychlení
+//$connection = connectionDB();
+$database = new Database(); 
+$connection = $database->connectionDB();
+
+$students = Student::getAllStudents($connection, "id, first_name, second_name");//kvůli columns -> zrychlení
 
 ?>
 
@@ -24,29 +27,30 @@ $students = getAllStudents($connection, "id, first_name, second_name");//kvůli 
     <script src="https://kit.fontawesome.com/f3c1d6cf9d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../query/header-query.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/students.css">
     <title>Document</title>
 </head>
 <body>
 <?php require "../assets/admin-header.php";?>
      <main>
      <section class="main-heading">
-                <h1>Žáci</h1>
+                <h1>Seznam žáků školy</h1>
                 <a href="addstudent.php">Přidat žáka</a>
                 </section>
         <section class="students-list">
-        <h1>Seznam žáků školy</h1>
+        
         <?php if(empty($students)): ?>
         <p>Students are missing</p>
         <?php else: ?>
-            <ul>
+            <div class="all-students">
                 <?php foreach($students as $one_student): ?>
-                    <li>
-                        <?php echo htmlspecialchars($one_student["first_name"]). " " .htmlspecialchars($one_student["second_name"]) ?>
-                    </li>
+                    <div class="one-student">
+                   <h2> <?php echo htmlspecialchars($one_student["first_name"]). " " .htmlspecialchars($one_student["second_name"]) ?></h2>
 
                     <a href='onestudent.php?id=<?= $one_student["id"] ?>'>Více informací</a>
+                    </div>
                 <?php endforeach ?>
-            </ul>
+            </div>
 
         <?php endif ?>
         </section>

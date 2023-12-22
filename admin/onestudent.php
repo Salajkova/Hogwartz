@@ -1,13 +1,23 @@
 <?php
 
 //Vypsání informací do stránky
-require_once(__DIR__."/../assets/db.php"); 
-require_once(__DIR__."/../assets/student.php");
+require_once(__DIR__."/../classes/Db.php"); 
+require_once(__DIR__."/../classes/Student.php");
+require_once(__DIR__."/../classes/Auth.php");
 
-$connection = connectionDB();
+session_start();
+
+if (!Auth::isLoggedIn()) {
+    die("Nepovolený přístup");
+}
+//$connection = connectionDB();
+$database = new Database(); //nemá constructor = prázdné závorky)
+$connection = $database->connectionDB();
 
 if ( isset($_GET["id"]) && is_numeric($_GET["id"]) ) {
-   $students = get_student($connection, $_GET["id"]);
+   $students = Student::get_student($connection, $_GET["id"]);
+} else {
+    $students = null;
 }
 
 ?>

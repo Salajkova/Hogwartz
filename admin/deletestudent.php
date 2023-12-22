@@ -1,22 +1,25 @@
 
 <?php
 
-require_once(__DIR__."/../assets/db.php");
-require_once(__DIR__."/../assets/student.php");
-require_once(__DIR__."/../assets/auth.php");
-require_once(__DIR__."/../assets/url.php");
+//require_once(__DIR__."/../assets/db.php");
+require_once(__DIR__."/../classes/Student.php");
+require_once(__DIR__."/../classes/Auth.php");
+require_once(__DIR__."/../classes/Url.php");
+require_once(__DIR__."/../classes/Db.php");
 
 session_start();
 
-if(!isLoggedIn() ){
+if(!Auth::isLoggedIn() ){
     die("nepovolený přístup!!!"); //video 178 PHP 2023
 }
 
-$connection = connectionDB();
+//$connection = connectionDB();
+$database = new Database(); //nemá constructor = prázdné závorky)
+$connection = $database->connectionDB();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
-if (delete_student($connection, $_GET["id"])){
-    redirectUrl("/web/Hogwartz/admin/students.php");
+if (Student::delete_student($connection, $_GET["id"])){
+    Url::redirectUrl("/web/Hogwartz/admin/students.php");
 }
 }
 

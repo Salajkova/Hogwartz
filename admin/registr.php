@@ -1,21 +1,24 @@
 <?php
 
-require "../assets/url.php";
-require "../assets/db.php";
-require "../assets/user.php";
+require "../classes/Url.php";
+//require "../assets/db.php";
+require "../classes/User.php";
+require "../classes/Db.php";
 
 session_start();
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $connection = connectionDB();
+    //$connection = connectionDB();
+    $database = new Database(); //nemá constructor = prázdné závorky)
+    $connection = $database->connectionDB();
 
     $first_name = $_POST["first_name"];
     $second_name = $_POST["second_name"];
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-    $id = createUser($connection, $first_name, $second_name, $email, $password);
+    $id = User::createUser($connection, $first_name, $second_name, $email, $password);
     
     if(!empty($id)) {
         session_regenerate_id(true); //zabraňuje fixation attack
@@ -25,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         //Nastavení ID uživatele
         $_SESSION["logged_in_user_id"] = $id;
 
-        redirectUrl("/web/Hogwartz/admin/students.php"); //funguje to?
+        Url::redirectUrl("/web/Hogwartz/admin/students.php"); //funguje to?
     } else {
         echo "Uživatele se nepodařilo přidat";
     }

@@ -1,6 +1,6 @@
 <?php
 
-require "../assets/url.php";
+require "../classes/Url.php";
 
 
 // Initialize the session.
@@ -24,6 +24,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 //Přesměrování na úvodní stranu
-redirectUrl("/web/Hogwartz/index.php")
+Url::redirectUrl("/web/Hogwartz/index.php")
 
 ?>

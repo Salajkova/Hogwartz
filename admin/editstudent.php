@@ -1,21 +1,24 @@
 <?php
 
-require_once(__DIR__."/../assets/db.php");
-require_once(__DIR__."/../assets/student.php");
-require_once(__DIR__."/../assets/auth.php");
-require_once(__DIR__."/../assets/url.php");
+//require_once(__DIR__."/../assets/db.php");
+require_once(__DIR__."/../classes/Student.php");
+require_once(__DIR__."/../classes/Auth.php");
+require_once(__DIR__."/../classes/Url.php");
+require_once(__DIR__."/../classes/Db.php");
 
 session_start();
 
-if(!isLoggedIn() ){
+if(!Auth::isLoggedIn() ){
     die("nepovolený přístup!!!"); //video 178 PHP 2023
 }
 
-$connection = connectionDB();
+//$connection = connectionDB();
+$database = new Database(); //nemá constructor = prázdné závorky)
+$connection = $database->connectionDB();
 
 //Získání dat z databáze
 if(isset($_GET["id"]) ) {
-    $one_student = get_student($connection, $_GET["id"]);
+    $one_student = Student::get_student($connection, $_GET["id"]);
 
     if($one_student){
 
@@ -42,9 +45,9 @@ if(isset($_GET["id"]) ) {
         $life = $_POST["life"];
         $college = $_POST["college"];
 
-    if(update_student($connection, $first_name, $second_name,
+    if(Student::update_student($connection, $first_name, $second_name,
                     $age, $life, $college, $id)) {
-                        redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
+                        Url::redirectUrl("/web/Hogwartz/admin/onestudent.php?id=$id");
                     };
     
     }
