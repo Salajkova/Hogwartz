@@ -1,12 +1,10 @@
 main {
-    min-height: 100vh;
-    background: linear-gradient(rgb(14, 14, 14, 0.25), rgb(7, 7, 7, 0.75)),
-        url(../img/hogwarts-admin-background-1.jpg);
+    background: linear-gradient(rgb(32, 32, 32, 0.35), rgb(32, 31, 31, 0.75)),
+        url("../img/hogwarts-admin-background-2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    /*zůstává na místě*/
 }
 
 .main-heading h1 {
@@ -17,38 +15,33 @@ main {
     font-size: 30px;
 }
 
-.all-students {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding-bottom: 30px;
-
-}
-
 .one-student {
-    width: 300px;
-    height: 200px;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
 
-    background-color: rgba(227, 218, 163, 0.6);
+.one-student-box {
+    width: 300px;
+    min-height: 150px;
+    background-color: rgb(239, 225, 177, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1px;
     border-radius: 10px;
-    transition: all 0.3s linear;
+    margin-bottom: 10px;
 }
 
-.one-student:hover {
-    transform: scale(1.05);
-}
-
-.one-student a {
+.buttons a {
     text-decoration: none;
     font-size: 20px;
-    padding: 5px 20px;
-    background: rgb(165, 132, 42);
+    padding: 2px 10px;
     color: white;
+    background: gray;
     margin-top: 15px;
+
 }

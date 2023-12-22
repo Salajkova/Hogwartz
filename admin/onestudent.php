@@ -31,6 +31,7 @@ if ( isset($_GET["id"]) && is_numeric($_GET["id"]) ) {
     <script src="https://kit.fontawesome.com/f3c1d6cf9d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../query/header-query.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/onestudent.css">
     <title>Document</title>
 </head>
 <body>
@@ -40,25 +41,29 @@ if ( isset($_GET["id"]) && is_numeric($_GET["id"]) ) {
     <section class="main-heading">
                 <h1>Jeden žák</h1>
                 </section>
-    <section>
-        <h1>Informace o žákovi</h1>
+    <section class="one-student">
         <?php if ($students === null): ?>
             <p>Žák nenalezen</p>
 
         <?php else: ?>
+            
+            <div class="one-student-box">
             <h2><?php echo htmlspecialchars($students["first_name"])." ".htmlspecialchars($students["second_name"])?></h2>
             <p>Věk: <?= htmlspecialchars($students["age"]) ?></p>
             <p>Dodatečné informace: <?= htmlspecialchars($students["life"]) ?></p>
             <p>Kolej: <?= htmlspecialchars($students["college"]) ?></p>
+            </div>
 
         <?php endif ?>
-    </section>
-    <section class="buttons">
+    
+    <div class="buttons">
         <a href="editstudent.php?id=<?= $students['id']?>"> Upravit záznam žáka </a>
         <br>
         <a href="deletestudent.php?id=<?= $students['id']?>">Smazat žáka</a>
+        
+        <a href="students.php">Zpět</a>
+    </div>
     </section>
-    <a href="students.php">Zpět</a>
     </main>
     
     <?php require "../assets/footer.php"?>
