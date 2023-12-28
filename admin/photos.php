@@ -11,6 +11,8 @@ if( !Auth::isLoggedIn()) {
     die("Nepovolený prístup!");
 }
 
+
+
 $db = new Database();
 $connection = $db->connectionDB();
 
@@ -33,6 +35,8 @@ $allImages = Image::getImagesByUserId($connection, $user_id);
     <script src="https://kit.fontawesome.com/f3c1d6cf9d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../query/header-query.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/photos.css">
+
     <title>Document</title>
 </head>
 <body>
@@ -41,8 +45,11 @@ $allImages = Image::getImagesByUserId($connection, $user_id);
     <section class="upload-photos">
         <h1>Fotky</h1>
         <form action="uploadphotos.php" method="POST" enctype="multipart/form-data">
-            <input type="file" name="image">
-            <input type="submit" name="submit" value="Nahrát obrázek">
+            <label for="choose-file" id="choose-file-text">Vybrat obrázek</label>
+            <input type="file" name="image" id="choose-file" class="choose-file">
+
+            <label for="upload-file"></label>
+            <input type="submit" class="upload-file" name="submit" value="Nahrát obrázek" id="upload-file">
         </form>
     </section>
     <section class="images">
@@ -55,9 +62,9 @@ $allImages = Image::getImagesByUserId($connection, $user_id);
                 <div>
                     <img src=<?= "../uploads/" . $user_id . "/" . $one_img["img_name"]?>>
                 </div>
-                <div>
-                    <a href=<?= "../uploads/" . $user_id . "/" . $one_img["img_name"]?> download="stazeny_soubor">Stáhnout</a> 
-                    <a href="delete_photo.php?id=<?= $user_id ?>&img_name=<?=$one_img["img_name"] ?>">Smazat</a>
+                <div class="images-btn">
+                    <a class="images-up" href=<?= "../uploads/" . $user_id . "/" . $one_img["img_name"]?> download="stazeny_soubor">Stáhnout</a> 
+                    <a class="images-de" href="delete_photo.php?id=<?= $user_id ?>&img_name=<?=$one_img["img_name"] ?>">Smazat</a>
                 </div>
             </div>
             <?php endforeach; ?>

@@ -55,6 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <script src="https://kit.fontawesome.com/f3c1d6cf9d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../query/header-query.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/addstudent.css">
+    <link rel="stylesheet" href="../query/addstudent-query.css">
     <title>Document</title>
 </head>
 <body>

@@ -35,9 +35,15 @@ $students = Student::getAllStudents($connection, "id, first_name, second_name");
      <main>
      <section class="main-heading">
                 <h1>Seznam žáků školy</h1>
-                <a href="addstudent.php">Přidat žáka</a>
-                </section>
-        <section class="students-list">
+                
+    </section>
+
+    <section class="filter-input">
+        <a href="addstudent.php">Přidat žáka</a>
+        <input type="text" class="filter" placeholder="Vyhledat">
+    </section>
+
+    <section class="students-list">
         
         <?php if(empty($students)): ?>
         <p>Students are missing</p>
@@ -59,4 +65,5 @@ $students = Student::getAllStudents($connection, "id, first_name, second_name");
     <?php require "../assets/footer.php"?>
 </body>
 <script src="../js/header.js"></script>
+<script src="../js/filter.js"></script>
 </html>

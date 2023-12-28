@@ -10,6 +10,10 @@ session_start();
 if (!Auth::isLoggedIn()) {
     die("Nepovolený přístup");
 }
+
+//Jaká je role uživatele
+$role = $_SESSION["role"];
+
 //$connection = connectionDB();
 $database = new Database(); //nemá constructor = prázdné závorky)
 $connection = $database->connectionDB();
@@ -56,13 +60,15 @@ if ( isset($_GET["id"]) && is_numeric($_GET["id"]) ) {
 
         <?php endif ?>
     
-    <div class="buttons">
-        <a href="editstudent.php?id=<?= $students['id']?>"> Upravit záznam žáka </a>
-        <br>
-        <a href="deletestudent.php?id=<?= $students['id']?>">Smazat žáka</a>
-        
-        <a href="students.php">Zpět</a>
-    </div>
+        <?php if($role === "admin"): ?>
+            <div class="buttons">
+                <a href="editstudent.php?id=<?= $students['id']?>"> Upravit záznam žáka </a>
+                <br>
+                <a href="deletestudent.php?id=<?= $students['id']?>">Smazat žáka</a>
+                
+                <a href="students.php">Zpět</a>
+            </div>
+        <?php endif; ?>
     </section>
     </main>
     

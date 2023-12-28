@@ -13,6 +13,8 @@ if(!Auth::isLoggedIn() ){
     die("nepovolený přístup!!!"); //video 178 PHP 2023
 }
 
+$role = $_SESSION["role"];
+
 //$connection = connectionDB();
 $database = new Database(); //nemá constructor = prázdné závorky)
 $connection = $database->connectionDB();
@@ -33,16 +35,35 @@ if (Student::delete_student($connection, $_GET["id"])){
     <link rel="stylesheet" href="../css/header.css">
     <script src="https://kit.fontawesome.com/f3c1d6cf9d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../query/header-query.css">
+    <link rel="stylesheet" href="../css/deletestudent.css">
     <link rel="stylesheet" href="../css/footer.css">
     <title>Smazat žáka</title>
 </head>
 <body>
     <?php require "../assets/admin-header.php";?>
-    <form action="" method="POST">
-        <p>Opravdu si přejete studenta vymazat?</p>
-        <Button>Smazat</Button>
-        <a href="onestudent.php?id=<?= $_GET['id']?>">Zrušit</a>
-    </form>
+
+
+    <main>
+        <?php if($role === "admin"): ?>
+            <section class="delete-form">
+            <form action="" method="POST">
+                <p>Opravdu si přejete studenta vymazat?</p>
+                
+                <div class="btns">
+                <Button>Smazat</Button>
+                <a href="onestudent.php?id=<?= $_GET['id']?>">Zrušit</a>
+                 </div>
+            </form>
+            </section>
+        <?php else: ?>
+            <section class="no-delete-form">
+                <h1>Obsah této stránky je k&nbsp;dispozici pouze administrátorům.</h1>
+            </section>
+
+        <?php endif; ?>
+
+        
+    </main>
     <?php require "../assets/footer.php";?>
     
 </body>

@@ -21,12 +21,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = User::getUserId($connection, $log_email);
 
     session_regenerate_id(true); //zabraňuje fixation attack
-    //echo $id; mělo by fungovat, ale  nejde, nejspíš kvůli autentifikaci, video 185
+  
 
        //Nastavení, že je uživatel přihlášený
        $_SESSION["is_logged_in"] = true;
        //Nastavení ID uživatele
        $_SESSION["logged_in_user_id"] = $id;
+       //Nastavení role uživatele
+       $_SESSION["role"] = User::getUserRole($connection, $id);
 
        Url::redirectUrl("/web/Hogwartz/admin/students.php");
 

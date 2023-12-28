@@ -6,9 +6,11 @@ main {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+
     /*zůstává na místě*/
 }
 
+/*main heading section*/
 .main-heading h1 {
     text-align: center;
     padding-bottom: 30px;
@@ -17,6 +19,50 @@ main {
     font-size: 30px;
 }
 
+/*Filter section*/
+.filter-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 18px;
+    margin-left: 40%;
+
+}
+
+.filter-input {
+    width: 150px;
+    padding: 10px;
+    background-color: none;
+    outline: none;
+}
+
+.filter-input:focus {
+    background-color: rgba(250, 235, 215, 0.849);
+}
+
+.filter-input::placeholder {
+    justify-content: center;
+    color: darkgray;
+    /*Placeholder?*/
+}
+
+.filter-input a {
+    text-decoration: none;
+    font-size: 18;
+    font-weight: 600;
+    color: lightblue;
+    padding-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-input a:hover {
+    font-size: 20;
+}
+
+/*Students list section*/
 .all-students {
     display: flex;
     flex-direction: row;
@@ -35,7 +81,7 @@ main {
     justify-content: center;
     align-items: center;
 
-    background-color: rgba(227, 218, 163, 0.6);
+    background-color: rgba(250, 235, 215, 0.849);
     border-radius: 10px;
     transition: all 0.3s linear;
 }
@@ -48,7 +94,7 @@ main {
     text-decoration: none;
     font-size: 20px;
     padding: 5px 20px;
-    background: rgb(165, 132, 42);
+    background: #a17e20;
     color: white;
     margin-top: 15px;
 }

@@ -1,6 +1,6 @@
 <?php
 
-//require_once(__DIR__."/../assets/db.php");
+
 require_once(__DIR__."/../classes/Student.php");
 require_once(__DIR__."/../classes/Auth.php");
 require_once(__DIR__."/../classes/Url.php");
@@ -11,6 +11,8 @@ session_start();
 if(!Auth::isLoggedIn() ){
     die("nepovolený přístup!!!"); //video 178 PHP 2023
 }
+
+$role = $_SESSION["role"];
 
 //$connection = connectionDB();
 $database = new Database(); //nemá constructor = prázdné závorky)
@@ -62,13 +64,20 @@ if(isset($_GET["id"]) ) {
     <script src="https://kit.fontawesome.com/f3c1d6cf9d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../query/header-query.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/editstudent.css">
+    <link rel="stylesheet" href="../query/editstudent-query.css">
     <title>Document</title>
 </head>
 <body>
 <?php require "../assets/admin-header.php";?>
     <main>
         
-   <?php require "../assets/formstudent.php"; ?>
+    <?php 
+   if($role ==="admin"){
+   require "../assets/formstudent.php";
+   } else {
+    echo "<h1>Obsah stránky je k dispozici pouze administrátorům</h1>";
+   } ?>
 
     </main>
     <?php require "../assets/footer.php"; ?>
